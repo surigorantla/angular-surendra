@@ -1,0 +1,52 @@
+{
+  "app": {
+    "title": "EMR:Onboarding",
+    "buttons": {
+      "clear": "Clear",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "back": "Back",
+      "continue": "Continue"
+    }
+  },
+  "shared": {
+    "components": {
+      "consent": {
+        "heading": "Access",
+        "subHeading": "Your consent is required to comply with Canada’s Anti-Spam Legislation (CASL)",
+        "desc": "Ontario Health (Digital Excellence in Health) requires your consent to send information to you by email in order to comply with Canada’s Anti-Spam Legislation. By completing the form below you are providing consent to Ontario Health (Digital Excellence in Health) and HITS eHealth Office at Hamilton Health Sciences to contact you via email or phone in order to send you information about the Provincial Electronic Health Record (EHR). For more information concerning CASL visit the ",
+        "linkLabel": "Government of Canada's website",
+        "labelClickConsent": "Please click \"I Consent\" to proceed with the form.",
+        "labelConsent": "I Consent",
+        "infoBoxTitle": "You might like to know…",
+        "infoBoxDesc": "When completing the request, please avoid any personal health information such as health card numbers and any personally identifiable information that are not required in the form.",
+        "errorConsentRequired": "Please give consent in order to continue. If you do not wish to provide consent, this form cannot be completed. Please continue browsing other sections of our website."
+      },
+      "general": {
+        "heading": "General",
+        "subHeading": "Your organization must be a health information custodian (HIC) providing health care through the programs and services it operates in Ontario to be eligible to access electronic health records (EHR).",
+        "desc": "Your legal entity name can help to determine if the organization is a health information custodian (HIC) within the meaning of the Personal Health Information Protection Act, 2004 (PHIPA) and is defined as an individual or organization who has custody or control of personal health information (PHI) as a result of or in connection with performing their powers or duties in health care as it relates to the EHR *",
+        "labelLRPRadio": "Are you the Legally Responsible Person (LRP) at the organization named as the HIC?",
+        "labelHintLRPRadio": "LRP is defined as the person with authority to sign on behalf of the legal entity (above) and in the case of a Group Practice HIC, has authority to bind the organization, including all its health information custodians and other users of the Group Practice. Typically, an LRP would be an owner or medical director at the organization.",
+        "labelYes": "Yes",
+        "labelNo": "No",
+        "labelRadio2": "Are you requesting access for the purposes of providing health care services?",
+        "labelLookupOrg": "Lookup my organization",
+        "labelOrgType": "Organization Type",
+        "orgTypeRequiredError": "Organization type is required.",
+        "labelOrgTypeHint": "Choose…",
+        "labelMedicalPractice": "Operating name of the medical practice",
+        "labelMedicalPracticePH": "Enter name of the medical practice",
+        "labelLegalEntity": "Legal Entity Name",
+        "labelLegalEntityHint": "Begin typing your legal entity name or CPSO# for Sole Physicians to narrow search.",
+        "labelLegalEntityHint2": "Please enter 1 or more characters",
+        "labelLegalEntityPH": "Search for your legal entity…",
+        "orgNameRequiredError": "Legal Entity Name is required.",
+        "errorLRP": "You must be the legally responsible person (LRP) to request access to ConnectingOntario ClinicalViewer. If your organization requires access speak to your legally responsible person (LRP) to have them submit a request on behalf of your organization.",
+        "errorHealth": "You must be an organization providing health care services to be eligible to access Ontario Health Services.",
+        "noMatchingLegalName": "My organization cannot be found in the list above, but I wish to continue to submit my request",
+        "labelPHIPA": "Is the organization Legal Entity Name identified above a health information custodian (HIC) within the meaning of the Personal Health Information Protection Act, 2004 (PHIPA)?"
+      }
+    }
+  }
+}

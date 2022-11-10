@@ -1,0 +1,251 @@
+<div class="row mt-4 mb-5">
+  <div class="col">
+    <h4 class="text-center" translate="shared.components.general.heading"></h4>
+    <p class="lead" translate="shared.components.general.subHeading"></p>
+    <p translate="shared.components.general.desc"></p>
+    <form [formGroup]="generalForm" (submit)="submit()">
+      <div>
+        <label class="pb-0 mb-0" for="LRP">
+          <span class="form-check-label-required">{{
+            'shared.components.general.labelLRPRadio' | translate
+          }}</span>
+
+          <div>
+            <span
+              class="hint-text"
+              for="LRP"
+              translate="shared.components.general.labelHintLRPRadio"
+            ></span>
+          </div>
+        </label>
+        <div class="mt-2">
+          <input
+            id="lrpATOrgYes"
+            value="yes"
+            class="form-check-input me-2 ms-0"
+            formControlName="isLrpAtOrg"
+            type="radio"
+          />
+          <label for="lrpATOrgYes" class="form-check-label">
+            {{ 'shared.components.general.labelYes' | translate }}
+          </label>
+          <input
+            id="lrpATOrgNo"
+            value="no"
+            class="form-check-input me-2 ms-4"
+            formControlName="isLrpAtOrg"
+            type="radio"
+          />
+          <label for="lrpATOrgNo" class="form-check-label">
+            {{ 'shared.components.general.labelNo' | translate }}
+          </label>
+        </div>
+
+        <div
+          class="error-message mt-2"
+          *ngIf="(f['isLrpAtOrg'].touched && f['isLrpAtOrg'].errors?.['required']) || f['isLrpAtOrg']?.value === 'no'"
+        >
+          {{ 'shared.components.general.errorLRP' | translate }}
+        </div>
+      </div>
+      <div class="mt-2">
+        <label class="pb-0 mb-0 form-check-label-required" for="forHealth">
+          {{ 'shared.components.general.labelRadio2' | translate }}
+        </label>
+        <div class="mt-2">
+          <input
+            id="forHealthYes"
+            value="yes"
+            class="form-check-input me-2 ms-0"
+            formControlName="isForHealth"
+            type="radio"
+          />
+          <label for="lrpATOrgYes" class="form-check-label">
+            {{ 'shared.components.general.labelYes' | translate }}
+          </label>
+          <input
+            id="forHealthNo"
+            value="no"
+            class="form-check-input me-2 ms-4"
+            formControlName="isForHealth"
+            type="radio"
+          />
+          <label for="lrpATOrgNo" class="form-check-label">
+            {{ 'shared.components.general.labelNo' | translate }}
+          </label>
+        </div>
+        <div
+          class="error-message mt-2"
+          *ngIf="(f['isForHealth'].touched && f['isForHealth'].errors?.['required']) || f['isForHealth']?.value === 'no'"
+        >
+          {{ 'shared.components.general.errorHealth' | translate }}
+        </div>
+      </div>
+      <div class="mt-4">
+        <p
+          class="lead fw-bold"
+          translate="shared.components.general.labelLookupOrg"
+        ></p>
+        <label
+          for="orgType"
+          translate="shared.components.general.labelOrgType"
+          class="form-check-label-required"
+        >
+        </label>
+        <select
+          id="orgType"
+          class="form-control"
+          formControlName="orgType"
+          (change)="onSelectOrgType($event)"
+        >
+          <option
+            value=""
+            translate="shared.components.general.labelOrgTypeHint"
+          ></option>
+          <option *ngFor="let orgType of orgTypes" value="{{ orgType.id }}">
+            {{ orgType.title }}
+          </option>
+        </select>
+        <div
+          *ngIf="f['orgType'].touched && f['orgType'].errors?.['required']"
+          class="error-message mt-2"
+        >
+          <span
+            translate="shared.components.general.orgTypeRequiredError"
+          ></span>
+        </div>
+      </div>
+      <div class="mt-4" *ngIf="!!selectedOrgType">
+        <div
+          *ngIf="
+            isIndividiualHICSelected();
+            then individualHIC;
+            else organizationHIC
+          "
+          #indiv
+        ></div>
+        <ng-template #individualHIC>
+          <label
+            for="medicalPractice"
+            class="form-check-label-required"
+            translate="shared.components.general.labelMedicalPractice"
+          ></label>
+          <input
+            [placeholder]="
+              'shared.components.general.labelMedicalPracticePH' | translate
+            "
+            class="form-control"
+            formControlName="medicalPractice"
+            id="medicalPractice"
+          />
+        </ng-template>
+        <ng-template #organizationHIC>
+          <label for="orgName">
+            <span class="form-check-label-required">{{
+              'shared.components.general.labelLegalEntity' | translate
+            }}</span>
+            <div>
+              <span
+                class="hint-text"
+                for="LRP"
+                translate="shared.components.general.labelLegalEntityHint"
+              ></span>
+            </div>
+          </label>
+          <input
+            (click)="clearOrgName()"
+            (typeaheadOnSelect)="onOrgNameSelect($event)"
+            [placeholder]="
+              'shared.components.general.labelLegalEntityPH' | translate
+            "
+            [typeaheadAsync]="true"
+            [typeahead]="filteredOrgs$"
+            class="form-control w-100"
+            formControlName="orgNameSearch"
+            id="orgName"
+            autocomplete="off"
+            typeaheadOptionField="PROVNAMEORG"
+          />
+        </ng-template>
+        <label for="orgName">
+          <div>
+            <span
+              class="hint-text"
+              for="LRP"
+              translate="shared.components.general.labelLegalEntityHint2"
+            ></span>
+          </div>
+        </label>
+
+        <div
+          *ngIf="f['orgNameSearch'].touched && f['orgName'].errors?.['required']"
+          class="error-message"
+        >
+          <span>{{
+            'shared.components.general.orgNameRequiredError' | translate
+          }}</span>
+        </div>
+      </div>
+      <div *ngIf="noMatchedOrg" class="mt-4 form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="noMatchingLegalName"
+          formControlName="noMatchingLegalName"
+        />
+        <label
+          class="form-check-label"
+          for="noMatchingLegalName"
+          translate="shared.components.general.noMatchingLegalName"
+        ></label>
+      </div>
+      <div class="mt-4" *ngIf="f['orgName'].value">
+        <label class="pb-0 mb-0 form-check-label-required" for="forHealth">
+          {{ 'shared.components.general.labelPHIPA' | translate }}
+        </label>
+        <div class="mt-4">
+          <input
+            id="PHPIAYes"
+            value="yes"
+            class="form-check-input me-2 ms-0"
+            formControlName="isPHIPA"
+            type="radio"
+          />
+          <label for="PHPIAYes" class="form-check-label">
+            {{ 'shared.components.general.labelYes' | translate }}
+          </label>
+          <input
+            id="PHPIANo"
+            value="no"
+            class="form-check-input me-2 ms-4"
+            formControlName="isPHIPA"
+            type="radio"
+          />
+          <label for="PHPIANo" class="form-check-label">
+            {{ 'shared.components.general.labelNo' | translate }}
+          </label>
+        </div>
+      </div>
+
+      <div class="d-grid gap-4 d-md-flex justify-content-md-start mt-4">
+        <button
+          id="buttonBack"
+          class="btn btn-outline-primary"
+          type="button"
+          translate="app.buttons.back"
+          (click)="back()"
+        ></button>
+        <button
+          id="buttonContinue"
+          [ngClass]="{ disabledWithAction: !generalForm.valid }"
+          class="btn btn-primary"
+          type="submit"
+          translate="app.buttons.continue"
+        ></button>
+      </div>
+
+      <div class="mt-4" *ngIf="submitted && !generalForm.valid"></div>
+    </form>
+  </div>
+</div>
